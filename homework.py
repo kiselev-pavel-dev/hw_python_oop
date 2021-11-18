@@ -3,6 +3,12 @@ from typing import ClassVar
 
 
 @dataclass
+class UnsupportedTypeTraining(Exception):
+    """Исключение для неподдерживаемых типов тренировки."""
+    print(Exception)
+
+
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -87,9 +93,6 @@ class SportsWalking(Training):
     COEF_2: ClassVar[float] = 2
     COEF_3: ClassVar[float] = 0.029
     HOURS_IN_MINUTES: ClassVar[int] = 60
-    action: int
-    duration: float
-    weight: float
     height: float
 
     def get_spent_calories(self) -> float:
@@ -100,7 +103,7 @@ class SportsWalking(Training):
         height = self.height
         temp = self.duration * self.HOURS_IN_MINUTES
         temp_2 = speed ** self.COEF_2 // height
-        calorie = weight * ((self.COEF_1 + (temp_2) * self.COEF_3)) * temp
+        calorie = weight * ((self.COEF_1 + temp_2 * self.COEF_3)) * temp
         return calorie
 
 
@@ -111,9 +114,6 @@ class Swimming(Training):
     LEN_STEP: ClassVar[float] = 1.38
     COEF_1: ClassVar[float] = 1.1
     COEF_2: ClassVar[int] = 2
-    action: int
-    duration: float
-    weight: float
     length_pool: float
     count_pool: float
 
@@ -143,6 +143,8 @@ def read_package(workout_type: str, data: list) -> Training:
         'RUN': Running,
         'WLK': SportsWalking
     }
+    if workout_type not in training_type.keys():
+        raise UnsupportedTypeTraining('Неподдерживаемый тип тренировки')
     training_class = training_type[workout_type]
     training_obj = training_class(*data)
     return training_obj
