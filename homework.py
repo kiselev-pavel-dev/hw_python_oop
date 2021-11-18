@@ -1,6 +1,6 @@
-from typing import ClassVar
-LEN_STEP: ClassVar[float] = 0.65
-M_IN_KM: ClassVar[float] = 1000
+LEN_STEP = 0.65
+M_IN_KM = 1000
+
 
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -28,8 +28,6 @@ class InfoMessage:
 class Training:
     """Базовый класс тренировки."""
 
-    LEN_STEP = 0.65
-    M_IN_KM = 1000
     def __init__(self,
                  action: int,
                  duration: float,
