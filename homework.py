@@ -27,6 +27,7 @@ class Training:
 
     LEN_STEP = 0.65
     M_IN_KM = 1000
+
     def __init__(self,
                  action: int,
                  duration: float,
