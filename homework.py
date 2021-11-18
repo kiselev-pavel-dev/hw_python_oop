@@ -1,8 +1,6 @@
 from typing import ClassVar
-
-LEN_STEP = 0.65
-M_IN_KM = 1000
-
+LEN_STEP: ClassVar[float] = 0.65
+M_IN_KM: ClassVar[float] = 1000
 
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -30,6 +28,8 @@ class InfoMessage:
 class Training:
     """Базовый класс тренировки."""
 
+    LEN_STEP = 0.65
+    M_IN_KM = 1000
     def __init__(self,
                  action: int,
                  duration: float,
@@ -82,7 +82,6 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Расчет израсходованных калорий."""
-        M_IN_KM = 1000
         coef_calorie_1 = 18
         coef_calorie_2 = 20
         hours_in_minutes = 60
@@ -134,7 +133,6 @@ class Swimming(Training):
 
     def get_mean_speed(self) -> float:
         """Расчет средней скорости."""
-        M_IN_KM = 1000
         temp = self.length_pool * self.count_pool
         mean_speed = temp / M_IN_KM / self.duration
         return mean_speed
@@ -151,7 +149,6 @@ class Swimming(Training):
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
         LEN_STEP = 1.38
-        M_IN_KM = 1000
         distance = self.action * LEN_STEP / M_IN_KM
         return distance
 
