@@ -28,6 +28,7 @@ class InfoMessage:
 class Training:
     """Базовый класс тренировки."""
 
+    LEN_STEP = 0.65
     def __init__(self,
                  action: int,
                  duration: float,
